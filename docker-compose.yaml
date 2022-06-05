@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres:11
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=pass123
+      - POSTGRES_DB=test_db
+  web:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    environment:
+      - DB_URL=postgresql://dbuser:pass123@db/test_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  
