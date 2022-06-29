@@ -1,5 +1,7 @@
+from datetime import datetime
 import imp
 from textwrap import indent
+from psycopg2 import Date
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -15,15 +17,17 @@ class User(Base):
     email = Column(String)
     address = Column(String)
     password = Column(String)
-    isactive = Column(String)
-    # date_instert = Column(DateTime)
+    isactive = Column(Boolean, default=False)
+    
 
 class Pets(Base):
     __tablename__ = "pets"
 
-    pet_id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
+    category = Column(String)
     pet_name = Column(String)
-    # pet_owner = Column(Integer, ForeignKey("user.id"))
+    age = Column(Integer)
+    owner = Column(String)
     comment = Column(String)
 
 
@@ -32,9 +36,9 @@ class Visit(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     petname = Column(String, index=True)
-    # visit_date = Column(DateTime)
-    # pet_id = Column(Integer, ForeignKey("pets.pet_id"))
-    # doctor_id = Column(Integer, ForeignKey("user.id"))
+    visitdate = Column(String)
+    doctor_name = Column(String)
     diagnosis = Column(String, index=True)
     drugs = Column(String)
     vaccine = Column(Boolean, default=False)
+

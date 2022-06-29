@@ -4,7 +4,7 @@ metadata:
   name: fastapi-ingress
 spec:
   rules:
-  - host: "tsadimas-fastapi.ddns.net"
+  - host: "kausonas.ddns.net"
     http:
       paths:
       - path: /

@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional, Generic, TypeVar
 from pydantic import BaseModel , Field
 from pydantic.generics import GenericModel
@@ -11,8 +12,19 @@ class UsersSchema(BaseModel):
     email: Optional[str]=None
     address: Optional[str]=None
     password: Optional[str]=None
-    isactive: Optional[str]=None
+    isactive: Optional[bool]=None
 
+    class Config:
+        orm_mode = True
+
+class PetSchema(BaseModel):
+    id: Optional[int]=None  
+    category: Optional[str]=None
+    pet_name: Optional[str]=None
+    age: Optional[int]=None
+    owner: Optional[int]=None
+    comment: Optional[str]=None
+    
     class Config:
         orm_mode = True
 
@@ -26,12 +38,11 @@ class RequestUser(BaseModel):
 
 class VisitSchema(BaseModel):
     id: Optional[int]=None 
-    petname: Optional[str]=None
-    # visit_date = Column(DateTime)
-    # pet_id = Column(Integer, ForeignKey("pets.pet_id"))
-    # doctor_id = Column(Integer, ForeignKey("user.id"))
-    diagnosis : Optional[str]=None
+    petname: Optional[str]=None    
+    diagnosis : Optional[str]=None   
+    doctor_name: Optional[str]=None    
     drugs : Optional[str]=None
+    visitdate : Optional[str]=None
     vaccine : Optional[bool]=None
     
     class Config:
@@ -45,3 +56,16 @@ class Response (GenericModel, Generic[T]):
     status: str
     message: str
     result: Optional[T]
+    token:Optional[str]
+
+
+
+
+class Login(BaseModel):
+    email:str
+    password:str
+
+
+
+
+

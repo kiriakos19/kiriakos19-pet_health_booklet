@@ -4,7 +4,8 @@ import  models
 from database import engine
 import router
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import APIRouter, HTTPException, Path, Depends
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -18,11 +19,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@app.get('/')
-async def Home():
-    return "Welcome Home"
 
-app.include_router(router.router, prefix="/user", tags=["user"])
+
+
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
+
+# @app.post("/token")
+# async def token(form_data: OAuth2PasswordRequestForm = Depends()):
+#     return {"access_token": form_data.username+ 'token'}
+
+# @app.get('/')
+# async def index(token: str = Depends(oauth2_scheme)):
+#     return {"token":token}  
+
+# ROUTER
+app.include_router(router.router, tags=["user"])
 
 
 

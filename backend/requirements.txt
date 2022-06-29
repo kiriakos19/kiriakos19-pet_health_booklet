@@ -23,3 +23,13 @@ typing-extensions==3.7.4.3
 urllib3==1.26.4
 uvicorn==0.13.4
 asyncpg==0.25.0
+
+bcrypt==3.2.0
+passlib==1.7.4
+python-multipart==0.0.5
+
+cryptography==3.4.7
+ecdsa==0.14.1
+pyasn1==0.4.8
+python-jose==3.2.0
+rsa==4.7.2
