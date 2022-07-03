@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: vue
+      app: client
+  template:
+    metadata:
+      labels:
+        component: vue
+        app: client
+    spec:
+      containers:
+        - name: vue
+          image: 'cooliz/vue:latest'
+          ports:
+            - containerPort: 8080          
+          imagePullPolicy: Always
+      #  volumes:
